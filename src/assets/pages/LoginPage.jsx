@@ -1,17 +1,17 @@
 import {useState} from 'react';
 import { useNavigate} from 'react-router-dom';
 import axios from "axios";
-// import { useContext, AuthContext } from 'react';
+ import { useContext, AuthContext } from '../context/auth.contex';
 
 
 function LoginPage(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-
+    
     const navigate = useNavigate();
 
-    // const { storeToken, authenticateUser } = useContext(AuthContext);
+    const { storeToken, authenticateUser } = useContext(AuthContext);
 
     const handleEmail = (e) => setEmail(e.target.value);
     const handlePassword = (e) => setPassword(e.target.value);
@@ -19,12 +19,12 @@ function LoginPage(){
     const handleLoginSubmit = (e) => {
         e.preventDefault();
         const requestBody = { email, password };
-        axios.post(`${API_URL}/auth/login`, requestBody)
+    axios.post(`${API_URL}/auth/login`, requestBody)
       .then((response) => {
         console.log('JWT token', response.data.authToken );
         storeToken(response.data.authToken);  
         authenticateUser(); 
-        navigate('/');                       
+        navigate('/api/post');                       
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
@@ -32,17 +32,34 @@ function LoginPage(){
       })
     }
     return (
-        <div id="loginbody">
-            <form onSubmit={handleLoginSubmit} id="loginform">
-                <h1>Log in</h1>
-                <label htmlFor="email">Email:</label>
-                <input type="email" id="email" name="email" value={email} onChange={handleEmail}/>
-                <label htmlFor="password">Password:</label>
-                <input type="password" id="password" name="password" value={password} onChange={handlePassword}/>
-                <button type="submit">Log in</button>
-            </form>
-        </div>
-    )
+      <div id="loginbody">
+        <form onSubmit={handleLoginSubmit} id="loginform">
+          <h1>Log in</h1>
+          <fieldset>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={handleEmail}
+            />
+          </fieldset>
+          <fieldset>
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={handlePassword}
+            />
+          </fieldset>
+
+          <button type="submit">Log in</button>
+        </form>
+      </div>
+    );
 }
 
 export default LoginPage;

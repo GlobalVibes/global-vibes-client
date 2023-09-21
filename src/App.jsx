@@ -5,6 +5,9 @@ import SignupPage from './assets/pages/SignupPage';
 import LoginPage from './assets/pages/LoginPage';
 import UserHomePage from './assets/pages/UserHomePage';
 import NavBar from './assets/components/NavBar';
+import IsPrivate from './assets/components/isPrivate';
+import IsAnon from './assets/components/isAnon';
+
 function App() {
 
   return (
@@ -12,9 +15,9 @@ function App() {
     {/*<NavBar />*/}
     <Routes>
       <Route path="/" element={<HomePage/>}></Route>
-      <Route path="/auth/signup" element={<SignupPage />}></Route>
-      <Route path="/auth/login" element={<LoginPage />}></Route>
-      <Route path="/api/posts" element={<UserHomePage />}></Route>
+      <Route path="/signup" element={<IsAnon><SignupPage /></IsAnon>}></Route>
+      <Route path="/login" element={<IsAnon><LoginPage /></IsAnon>  }></Route>
+      <Route path="/posts" element={<IsPrivate><UserHomePage /></IsPrivate>}></Route>
     </Routes>
     </>
   )
