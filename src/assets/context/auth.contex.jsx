@@ -59,7 +59,7 @@ function AuthProviderWrapper(props) {
     // and update the state variables    
     authenticateUser();
   }  
-  useEffect(() => {                 d
+  useEffect(() => {                
     authenticateUser();
   }, []);
  

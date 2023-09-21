@@ -1,7 +1,7 @@
-import {useState} from 'react';
+import {useState, useContext} from 'react';
 import { useNavigate} from 'react-router-dom';
 import axios from "axios";
- import { useContext, AuthContext } from '../context/auth.contex';
+ import { AuthContext } from '../context/auth.contex';
 
 
 function LoginPage(){
@@ -19,7 +19,7 @@ function LoginPage(){
     const handleLoginSubmit = (e) => {
         e.preventDefault();
         const requestBody = { email, password };
-    axios.post(`${API_URL}/auth/login`, requestBody)
+    axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, requestBody)
       .then((response) => {
         console.log('JWT token', response.data.authToken );
         storeToken(response.data.authToken);  
