@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+const storedToken = localStorage.getItem("authToken");
 
 function UserDetails() {
 
@@ -9,7 +10,7 @@ function UserDetails() {
 
     const getUSer = () => {
         axios
-            .get(`${import.meta.env.VITE_API_URL}/users/${userId}`)
+            .get(`${import.meta.env.VITE_API_URL}/users/${userId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(response => {
                 setUser(response.data)
             })
@@ -28,11 +29,11 @@ function UserDetails() {
                 height={100}
                 width={50} />
 
-            <container>
+            <div>
                 <h3>Name:</h3> {user.name}
-                <h3>Name:</h3> {user.country}
-                <h3>Name:</h3> {user.language}
-            </container>
+                <h3>County:</h3> {user.country}
+                <h3>Language:</h3> {user.language}
+            </div>
         </div>
     )
 }

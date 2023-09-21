@@ -1,10 +1,11 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+const storedToken = localStorage.getItem("authToken");
 
 function UserPosts() {
 
-    const [userPosts, setUserPosts] = useState({})
+    const [userPosts, setUserPosts] = useState([])
     const { author } = useParams();
 
     const getUserPosts = () => {
@@ -22,7 +23,7 @@ function UserPosts() {
 
     const handleDelete = (postId) => {
         axios
-            .delete(`${import.meta.env.VITE_API_URL}/posts/${postId}`)
+            .delete(`${import.meta.env.VITE_API_URL}/posts/${postId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then((response) => {
 
                 setUserPosts(userPosts.filter((post) => post.id !== postId));

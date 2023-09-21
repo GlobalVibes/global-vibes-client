@@ -9,7 +9,8 @@ function App() {
 
   return (
     <>
-    {/*<NavBar />*/}
+    <NavBar />
+    
     <Routes>
       <Route path="/" element={<HomePage/>}></Route>
       <Route path="/auth/signup" element={<SignupPage />}></Route>

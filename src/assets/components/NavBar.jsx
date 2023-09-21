@@ -1,5 +1,10 @@
+import {Link} from 'react-router-dom';
+
 function NavBar(){
-    return <h1>Hello</h1>
+    <div id="navbar">
+            <button><Link to="/auth/login">Log in</Link></button>
+            <button><Link to="/auth/signup">Sign up</Link></button>
+          </div>
 }
 
 export default NavBar;
