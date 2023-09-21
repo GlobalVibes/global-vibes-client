@@ -1,8 +1,8 @@
-import { useState, useContext } from "react";
+import { useState,  useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import {  AuthContext } from '../context/auth.contex.jsx';
-const API_URL = "http://localhost:5005";
+import { AuthContext} from '../context/auth.contex';
+
 
 function SignupPage(){
     const [email, setEmail] = useState("");
@@ -33,7 +33,7 @@ function SignupPage(){
       // If the POST request is a successful redirect to the login page
       // If the request resolves with an error, set the error message in the state
       axios
-        .post(`${API_URL}/auth/signup`, requestBody)
+        .post(`${import.meta.env.VITE_API_URL}/auth/signup`, requestBody)
         .then((response) => {
           console.log(response)
           navigate("/login");
