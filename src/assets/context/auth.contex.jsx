@@ -59,11 +59,7 @@ function AuthProviderWrapper(props) {
     // and update the state variables    
     authenticateUser();
   }  
-<<<<<<< HEAD
-  useEffect(() => {                 
-=======
   useEffect(() => {                
->>>>>>> refs/remotes/origin/main
     authenticateUser();
   }, []);
  
