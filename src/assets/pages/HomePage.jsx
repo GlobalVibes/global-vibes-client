@@ -6,8 +6,8 @@ function HomePage(){
         <div id="upperPage">
           <img src={Logo} alt="Logo" />
           <div id="btn-container">
-            <button><Link to="/auth/login">Log in</Link></button>
-            <button><Link to="/auth/signup">Sign up</Link></button>
+            <button><Link to="/login">Log in</Link></button>
+            <button><Link to="/signup">Sign up</Link></button>
           </div>
         </div>
         <div id="lowerPart">

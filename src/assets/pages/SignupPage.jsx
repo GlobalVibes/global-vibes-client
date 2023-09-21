@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useContext, AuthContext } from '../context/auth.contex';
+import {  AuthContext } from '../context/auth.contex.jsx';
 const API_URL = "http://localhost:5005";
 
 function SignupPage(){
