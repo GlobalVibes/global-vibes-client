@@ -1,16 +1,17 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 const storedToken = localStorage.getItem("authToken");
+import { AuthContext } from '../context/auth.contex';
 
 function UserPosts() {
-
+    const {user} = useContext(AuthContext);
     const [userPosts, setUserPosts] = useState([])
     const { author } = useParams();
 
     const getUserPosts = () => {
         axios
-            .get(`${import.meta.env.VITE_API_URL}/posts/${author}`)
+            .get(`${import.meta.env.VITE_API_URL}/posts/${userId}`)
             .then(response => {
                 setUserPosts(response.data)
             })
