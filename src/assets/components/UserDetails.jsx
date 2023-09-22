@@ -1,7 +1,4 @@
-import axios from "axios";
-import { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-const storedToken = localStorage.getItem("authToken");
+import { useContext } from "react";
 import { AuthContext } from '../context/auth.contex';
 
 function UserDetails() {
@@ -17,7 +14,7 @@ function UserDetails() {
             />
 
             <div className="user-info">
-                <h3>Name: {user.name[0].toUpperCase() + user.name.slice(1)}</h3> 
+                <h3>Name: {user.name}</h3> 
                 <h3>Country:{user.country}</h3> 
                 <h3>Language:{user.language}</h3> 
             </div>
