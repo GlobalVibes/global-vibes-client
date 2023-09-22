@@ -8,7 +8,7 @@ import UserPosts from './assets/components/UserPosts';
 import NavBar from './assets/components/NavBar';
 import IsPrivate from './assets/components/isPrivate';
 import IsAnon from './assets/components/isAnon';
-
+import UserHomePage from './assets/pages/UserHomePage';
 
 function App() {
 
@@ -20,7 +20,7 @@ function App() {
       <Route path="/" element={<HomePage/>}></Route>
       <Route path="/signup" element={<IsAnon><SignupPage /></IsAnon>}></Route>
       <Route path="/login" element={<IsAnon><LoginPage /></IsAnon>  }></Route>
-      <Route path="/posts" element={<IsPrivate><UserHomePage /></IsPrivate>}></Route>
+      <Route path="/user-homepage" element={<IsPrivate><UserHomePage /></IsPrivate>}></Route>
     </Routes>
     </>
   )
