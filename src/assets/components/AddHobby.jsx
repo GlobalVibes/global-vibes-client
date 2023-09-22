@@ -1,68 +1,50 @@
 import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState} from "react";
+
 
 function AddHobby() {
-    const navigate = useNavigate();
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");    
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewPost({
-            ...newHobby,
-            [name]: value,
-        });
-    };
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-       
+        e.preventDefault();        
+
+        const requestBody = { title, description };
+
         axios
-            .post(`${import.meta.env.VITE_API_URL}/user-homepage`, newHobby, { headers: { Authorization: `Bearer ${storedToken}` } })
+            .post(`${import.meta.env.VITE_API_URL}/api/hobbies`, requestBody)
             .then((response) => {
 
-                const createdHobby = response.data;
-
-                navigate(`/user-homepage/${createdHobby.id}`);
+                setTitle("");
+                setDescription("");
+                
             })
-            .catch((error) => {
-
-                console.error("Error creating a new hobby:", error);
-            });
+            .catch((error) => console.log(error));
     };
 
-    const [newHobby, setNewPost] = useState({
-        title: "",
-        description: "",
-       
-    });
 
     return (
-        <div>
-            <h2>Add a New Hobby</h2>
+        <div className="AddHobby">
+            <h3>Add New Hobby</h3>
+
             <form onSubmit={handleSubmit}>
-            <div>
-                    <label htmlFor="title">Title:</label>
-                    <input
-                        type="text"
-                        id="title"
-                        name="title"
-                        value={newHobby.title}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
-                
-                <div>
-                    <label htmlFor="description">Description:</label>
-                    <textarea
-                        id="description"
-                        name="description"
-                        value={newHobby.description}
-                        onChange={handleInputChange}
-                        required
-                    ></textarea>
-                </div>
-                
+                <label>Title:</label>
+                <input
+                    type="text"
+                    name="title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                />
+
+                <label>Description:</label>
+                <textarea
+                    type="text"
+                    name="description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                />
+
                 <button type="submit">Add Hobby</button>
             </form>
         </div>
