@@ -6,8 +6,7 @@ import { Link } from 'react-router-dom';
 function NavBar() {
 
   const {
-    isLoggedIn,
-    user,
+    isLoggedIn,    
     logOutUser
   } = useContext(AuthContext);
 
@@ -15,12 +14,12 @@ function NavBar() {
     <div id="navbar">
       {isLoggedIn && (
         <>
-          <Link to="/posts">
+          <Link to="/user-homepage">
             <button>User homepage</button>
           </Link>
 
           <button onClick={logOutUser}>Logout</button>
-          <span>{user && user.name}</span>
+          
         </>
       )}
 
