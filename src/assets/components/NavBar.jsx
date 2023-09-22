@@ -6,8 +6,7 @@ import { Link } from 'react-router-dom';
 function NavBar() {
 
   const {
-    isLoggedIn,
-    user,
+    isLoggedIn,    
     logOutUser
   } = useContext(AuthContext);
 
@@ -20,7 +19,7 @@ function NavBar() {
           </Link>
 
           <button onClick={logOutUser}>Logout</button>
-          <span>{user && user.name}</span>
+          
         </>
       )}
 
