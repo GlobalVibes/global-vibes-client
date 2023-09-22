@@ -1,5 +1,5 @@
 import {Routes, Route, Link} from 'react-router-dom';
-import Logo from "../GlobalVibesLogo.png";
+import Logo from "../pages/images/GlobalVibesLogo.png";
 function HomePage(){
     return (
       <div id="bodyHome">

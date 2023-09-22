@@ -15,8 +15,7 @@ function AddPost() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        r
+       
         axios
             .post(`${import.meta.env.VITE_API_URL}/posts`, newPost, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then((response) => {

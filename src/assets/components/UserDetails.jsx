@@ -13,6 +13,7 @@ function UserDetails() {
             .get(`${import.meta.env.VITE_API_URL}/users/${userId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(response => {
                 setUser(response.data)
+                console.log(response.data);
             })
             .catch((error) => console.log(error));
     }
@@ -27,9 +28,11 @@ function UserDetails() {
                 src={user.image}
                 alt={user.name}
                 height={100}
-                width={50} />
+                width={50}
+                className="user-avatar"
+            />
 
-            <div>
+            <div className="user-info">
                 <h3>Name:</h3> {user.name}
                 <h3>County:</h3> {user.country}
                 <h3>Language:</h3> {user.language}

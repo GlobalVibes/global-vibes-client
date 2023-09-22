@@ -24,7 +24,7 @@ function LoginPage(){
         console.log('JWT token', response.data.authToken );
         storeToken(response.data.authToken);  
         authenticateUser(); 
-        navigate('/api/post');                       
+        navigate('/posts');                       
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;

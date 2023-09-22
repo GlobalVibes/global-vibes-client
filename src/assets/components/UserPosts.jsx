@@ -37,7 +37,7 @@ function UserPosts() {
     };
 
     return (
-        <div className="posts">
+        <div className="user-posts">
             <h2>Your posts</h2>
             {userPosts.map((post) => (
                 <div key={post.id} className="post">

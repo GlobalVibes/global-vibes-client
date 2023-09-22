@@ -6,8 +6,8 @@ import AddPost from "../components/AddPost"
 
 function UserHomePage() {
     return (
-        <div>
-            <UserDetails/>
+        <div className="user-homepage">
+            <UserDetails />
             <AddPost />
             <UserPosts />
         </div>
