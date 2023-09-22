@@ -1,10 +1,17 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from '../context/auth.contex';
 
 function AddPost() {
     const navigate = useNavigate();
-
+    const { storedToken } = useContext(AuthContext);
+    const [hobbies, setHobbies] = useState([]);
+    const [newPost, setNewPost] = useState({
+        image: "",
+        description: "",
+        hobby: "",
+    });
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewPost({
@@ -15,26 +22,34 @@ function AddPost() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(newPost);
        
         axios
-            .post(`${import.meta.env.VITE_API_URL}/posts`, newPost, { headers: { Authorization: `Bearer ${storedToken}` } })
+            .post(`${import.meta.env.VITE_API_URL}/api/posts`, newPost, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then((response) => {
-
+                
                 const createdPost = response.data;
-
-                navigate(`/posts/${createdPost.id}`);
+                navigate(`/user-homepage`);
             })
             .catch((error) => {
 
                 console.error("Error creating a new post:", error);
             });
-    };
+        };
 
-    const [newPost, setNewPost] = useState({
-        image: "",
-        description: "",
-        hobby: "",
-    });
+        useEffect(() => {
+          axios
+            .get(`${import.meta.env.VITE_API_URL}/api/hobbies`, {
+              headers: { Authorization: `Bearer ${storedToken}` },
+            })
+            .then((hobbies) => {
+              setHobbies(hobbies.data);
+            })
+            .catch((error) => {
+              console.log("Error: ", error);
+            });
+        }, []);
+
 
     return (
         <div>
@@ -62,14 +77,21 @@ function AddPost() {
                 </div>
                 <div>
                     <label htmlFor="hobby">Hobby:</label>
-                    <input
+                    {/*<input
                         type="text"
                         id="hobby"
                         name="hobby"
                         value={newPost.hobby}
                         onChange={handleInputChange}
                         required
-                    />
+                    />*/}   
+                    <select id="hobby">
+                        {hobbies.map((elem)=> {
+                            return(
+                                <option key={elem._id} value={elem.description}>{elem.title}</option>
+                            )
+                        })}
+                    </select>
                 </div>
                 <button type="submit">Add Post</button>
             </form>

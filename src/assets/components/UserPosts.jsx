@@ -11,7 +11,7 @@ function UserPosts() {
 
     const getUserPosts = () => {
         axios
-            .get(`${import.meta.env.VITE_API_URL}/posts/${userId}`)
+            .get(`${import.meta.env.VITE_API_URL}/api/posts`)
             .then(response => {
                 setUserPosts(response.data)
             })
@@ -24,7 +24,7 @@ function UserPosts() {
 
     const handleDelete = (postId) => {
         axios
-            .delete(`${import.meta.env.VITE_API_URL}/posts/${postId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
+            .delete(`${import.meta.env.VITE_API_URL}/api/posts`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then((response) => {
 
                 setUserPosts(userPosts.filter((post) => post.id !== postId));
