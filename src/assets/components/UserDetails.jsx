@@ -33,9 +33,9 @@ function UserDetails() {
             />
 
             <div className="user-info">
-                <h3>Name:</h3> {user.name}
-                <h3>County:</h3> {user.country}
-                <h3>Language:</h3> {user.language}
+                <h3>Name:{user.name}</h3> 
+                <h3>County:{user.country}</h3> 
+                <h3>Language:{user.language}</h3> 
             </div>
         </div>
     )
