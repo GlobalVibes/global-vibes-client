@@ -7,7 +7,7 @@ import NavBar from './assets/components/NavBar';
 import IsPrivate from './assets/components/isPrivate';
 import IsAnon from './assets/components/isAnon';
 import UserHomePage from './assets/pages/UserHomePage';
-import UserHomePage from './assets/pages/UserHomePage';
+
 
 
 function App() {
