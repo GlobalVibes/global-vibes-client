@@ -15,7 +15,7 @@ function NavBar() {
     <div id="navbar">
       {isLoggedIn && (
         <>
-          <Link to="/posts">
+          <Link to="/user-homepage">
             <button>User homepage</button>
           </Link>
 
