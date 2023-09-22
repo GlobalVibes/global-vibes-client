@@ -39,7 +39,7 @@ function UserPosts() {
                 <div key={post.id} className="post">
                     <img src={post.image} alt={post.description} />
                     <p>{post.description}</p>
-                    <p>{post.hobby}</p>
+                    <p>{post.hobbie}</p>
                     <button onClick={() => handleDelete(post.id)}>Delete</button>
                     <button onClick={() => handleUpdate(post.id)}>Update</button>
                 </div>
