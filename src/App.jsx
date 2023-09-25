@@ -7,7 +7,7 @@ import NavBar from './assets/components/NavBar';
 import IsPrivate from './assets/components/isPrivate';
 import IsAnon from './assets/components/isAnon';
 import UserHomePage from './assets/pages/UserHomePage';
-
+import UpdatePost from './assets/pages/UpdatePost';
 
 
 function App() {
@@ -21,6 +21,7 @@ function App() {
       <Route path="/signup" element={<IsAnon><SignupPage /></IsAnon>}></Route>
       <Route path="/login" element={<IsAnon><LoginPage /></IsAnon>  }></Route>
       <Route path="/user-homepage" element={<IsPrivate><UserHomePage /></IsPrivate>}></Route>  
+      <Route path="/update/:postId" element={<IsPrivate><UpdatePost /></IsPrivate>}></Route>
     </Routes>
     </>
   )

@@ -3,6 +3,7 @@ import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../context/auth.contex';
 function AddPost() {
+
     const navigate = useNavigate();
     const { storedToken } = useContext(AuthContext);
     const [hobbies, setHobbies] = useState([]);
@@ -11,6 +12,7 @@ function AddPost() {
         description: "",
         hobby: "",
     });
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewPost({
@@ -18,6 +20,7 @@ function AddPost() {
             [name]: value,
         });
     };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(newPost);
@@ -33,6 +36,7 @@ function AddPost() {
                 console.error("Error creating a new post:", error);
             });
     };
+
     useEffect(() => {
         axios
             .get(`${import.meta.env.VITE_API_URL}/api/hobbies`, {
@@ -45,7 +49,9 @@ function AddPost() {
                 console.log("Error: ", error);
             });
     }, []);
+
     return (
+        newPost && (
         <div>
             <h2>Add a New Post</h2>
             <form onSubmit={handleSubmit}>
@@ -83,6 +89,7 @@ function AddPost() {
                 <button type="submit">Add Post</button>
             </form>
         </div>
+        )
     );
 }
 export default AddPost;
