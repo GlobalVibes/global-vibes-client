@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/auth.contex";
 import service from "../../services/file-upload.service";
 
-function AddPost() {
+function AddPost(props) {
   const { storedToken } = useContext(AuthContext);
   const [hobbies, setHobbies] = useState([]);
   const [newPost, setNewPost] = useState({
@@ -41,15 +41,20 @@ function AddPost() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(newPost);
+    e.preventDefault();    
 
     axios
       .post(`${import.meta.env.VITE_API_URL}/api/posts`, newPost, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        setNewPost(" ");
+        props.getPosts()
+       
+        setNewPost({
+          image: "",
+          description: "",
+          hobby: "",
+        });      
       })
       .catch((error) => {
         console.error("Error creating a new post:", error);

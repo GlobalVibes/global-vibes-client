@@ -4,17 +4,11 @@ import { AuthContext } from '../context/auth.contex';
 import { Link, useNavigate } from "react-router-dom";
 const storedToken = localStorage.getItem("authToken");
 import service from "../../services/file-upload.service";
-
 function UserPosts() {
-
     const { user } = useContext(AuthContext);
     const [userPosts, setUserPosts] = useState([])
-
-
     const navigate = useNavigate()
-
     useEffect(() => {
-
         axios
             .get(`${import.meta.env.VITE_API_URL}/api/posts`)
             .then(response => {
@@ -22,7 +16,6 @@ function UserPosts() {
             })
             .catch((error) => console.log(error));
     }, []);
-
     useEffect(() => {
         service.getPosts()
           .then((data) => {
@@ -31,19 +24,14 @@ function UserPosts() {
           })
           .catch((err) => console.log(err));
       }, []);
-
     const handleDelete = (postId) => {
-
         axios
             .delete(`${import.meta.env.VITE_API_URL}/api/posts/${postId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(() => {
-
                 setUserPosts(userPosts.filter((current) => current._id !== postId))
-
             })
             .catch((error) => console.log(error));
     };
-
     return (
         <div className="user-posts">
             <h2>Your posts</h2>
