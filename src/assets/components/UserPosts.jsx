@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from '../context/auth.contex';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const storedToken = localStorage.getItem("authToken");
 
 function UserPosts() {
@@ -43,7 +43,7 @@ function UserPosts() {
                     <p>{post.description}</p>
                     <p>{post.hobbie}</p>
                     <button onClick={(e) => handleDelete(post._id)}>Delete</button>
-                    <button onClick={() => handleUpdate(post._id)}>Update</button>
+                    <Link to={`/update/${post._id}`}>Update</Link>
                 </div>
             ))}
         </div>
