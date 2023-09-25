@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/auth.contex";
+import service from "../../services/file-upload.service";
 
 function AddPost() {
   const { storedToken } = useContext(AuthContext);
@@ -10,6 +11,26 @@ function AddPost() {
     description: "",
     hobby: "",
   });
+  const [imageUrl, setImageUrl] = useState("")
+
+  const handleFileUpload = (e) => {
+    console.log("The file to be uploaded is: ", e.target.files[0]);
+ 
+    const uploadData = new FormData();
+ 
+    // imageUrl => this name has to be the same as in the model since we pass
+    // req.body to .create() method when creating a new movie in '/api/movies' POST route
+    uploadData.append("profilePhoto", e.target.files[0]);
+ 
+    service
+      .uploadImage(uploadData)
+      .then(response => {
+        // console.log("response is: ", response);
+        // response carries "fileUrl" which we can use to update the state
+        setNewPost({...newPost, image: response.fileUrl});
+      })
+      .catch(err => console.log("Error while uploading the file: ", err));
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -52,15 +73,15 @@ function AddPost() {
     newPost && (
       <div>
         <h2>Add a New Post</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} >
           <div>
             <label htmlFor="image">Image URL:</label>
             <input
-              type="text"
+              type="file"
               id="image"
               name="image"
-              value={newPost.image}
-              onChange={handleInputChange}
+            //   value={newPost.image}
+              onChange={(e) => {handleFileUpload(e)}}
             />
           </div>
           <div>

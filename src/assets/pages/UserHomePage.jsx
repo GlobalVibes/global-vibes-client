@@ -7,6 +7,7 @@ import AddHobby from "../components/AddHobby";
 
 
 function UserHomePage() {
+
     return (
         <div className="user-homepage">
             <UserDetails />

@@ -6,7 +6,7 @@ function UserDetails() {
     return (
         <div className="user-details">
             <img
-                src={user.image}
+                src={user.profilePhoto}
                 alt={user.name}
                 height={100}
                 width={50}

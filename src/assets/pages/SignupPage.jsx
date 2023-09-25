@@ -2,14 +2,14 @@ import { useState,  useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext} from '../context/auth.contex';
-
+import service from '../../services/file-upload.service';
 
 function SignupPage(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
     const [errorMessage, setErrorMessage] = useState(undefined);
-    const [profilePhoto, setProfile] = useState("");
+    const [profilePhoto, setProfilePhoto] = useState("");
     const [country, setCountry] = useState("");
     const [language, setLanguage] = useState("");
 
@@ -44,7 +44,28 @@ function SignupPage(){
           //setErrorMessage(errorDescription);
         });
     };
-  
+
+
+    const handleFileUpload = (e) => {
+      // console.log("The file to be uploaded is: ", e.target.files[0]);
+   
+      const uploadData = new FormData();
+   
+      // imageUrl => this name has to be the same as in the model since we pass
+      // req.body to .create() method when creating a new movie in '/api/movies' POST route
+      uploadData.append("profilePhoto", e.target.files[0]);
+   
+      service
+        .uploadImage(uploadData)
+        .then(response => {
+          console.log("response is: ", response.fileUrl);
+          // response carries "fileUrl" which we can use to update the state
+          setProfilePhoto(response.fileUrl);
+        })
+        .catch(err => console.log("Error while uploading the file: ", err));
+    };
+
+
     return (
       <div>
         <form onSubmit={handleSignupSubmit}>
@@ -93,8 +114,7 @@ function SignupPage(){
                 type="file"
                 id="profilePhoto"
                 name="profilePhoto"
-                value={profilePhoto}
-                onChange={handleProfile}
+                onChange={(e) => {handleFileUpload(e)}}
               />
             </label>
           </fieldset>

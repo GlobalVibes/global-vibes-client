@@ -3,6 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import { AuthContext } from '../context/auth.contex';
 import { Link, useNavigate } from "react-router-dom";
 const storedToken = localStorage.getItem("authToken");
+import service from "../../services/file-upload.service";
 
 function UserPosts() {
 
@@ -21,6 +22,15 @@ function UserPosts() {
             })
             .catch((error) => console.log(error));
     }, []);
+
+    useEffect(() => {
+        service.getPosts()
+          .then((data) => {
+            // console.log("data", data);
+            setUserPosts(data);
+          })
+          .catch((err) => console.log(err));
+      }, []);
 
     const handleDelete = (postId) => {
 
