@@ -13,19 +13,19 @@ const errorHandler = (err) => {
 };
 
 const getPosts = () => {
-  return api.get("api/posts")
+  return api.get("/api/posts")
     .then((res) => res.data)
     .catch(errorHandler);
 };
 
 const uploadImage = (file) => {
-  return api.post("api/upload", file)
+  return api.post("/api/upload", file)
     .then(res => res.data)
     .catch(errorHandler);
 };
 
 const createPost = (newMovie) => {
-  return api.post("api/posts", newMovie)
+  return api.post("/api/posts", newMovie)
     .then(res => res.data)
     .catch(errorHandler);
 };
