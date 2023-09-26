@@ -48,14 +48,13 @@ function AddPost(props) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        props.getPosts()
-       
         setNewPost({
           image: "",
           description: "",
           hobby: "",
-        });      
-      })
+        });
+        props.getPosts()
+            })
       .catch((error) => {
         console.error("Error creating a new post:", error);
       });

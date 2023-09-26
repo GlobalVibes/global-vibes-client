@@ -11,9 +11,6 @@ import { AuthContext } from '../context/auth.contex';
 
 
 function UserHomePage() {
-
-<<<<<<< HEAD
-=======
     const [userPosts, setUserPosts] = useState([]);
     console.log(userPosts)
 
@@ -42,8 +39,6 @@ function UserHomePage() {
             .catch((error) => console.log(error));
     };
 
-
->>>>>>> refs/remotes/origin/main
     return (
         <div className="user-homepage">
             <UserDetails />
