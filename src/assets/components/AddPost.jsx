@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/auth.contex";
 import service from "../../services/file-upload.service";
 
-function AddPost({hobbies, setHobbies, getPost, userPosts}) {
+function AddPost({hobbies, setHobbies, getPosts, userPosts}) {
   const { storedToken } = useContext(AuthContext);
  
   const [newPost, setNewPost] = useState({
@@ -41,7 +41,7 @@ function AddPost({hobbies, setHobbies, getPost, userPosts}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    const storedToken = localStorage.getItem("authToken");
     axios
       .post(`${import.meta.env.VITE_API_URL}/api/posts`, newPost, {
         headers: { Authorization: `Bearer ${storedToken}` },
@@ -61,6 +61,7 @@ function AddPost({hobbies, setHobbies, getPost, userPosts}) {
   };
 
   useEffect(() => {
+    const storedToken = localStorage.getItem("authToken");
     axios
       .get(`${import.meta.env.VITE_API_URL}/api/hobbies`, {
         headers: { Authorization: `Bearer ${storedToken}` },
