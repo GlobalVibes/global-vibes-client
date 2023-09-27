@@ -3,9 +3,9 @@ import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/auth.contex";
 import service from "../../services/file-upload.service";
 
-function AddPost(props) {
+function AddPost({hobbies, setHobbies, getPost, userPosts}) {
   const { storedToken } = useContext(AuthContext);
-  const [hobbies, setHobbies] = useState([]);
+ 
   const [newPost, setNewPost] = useState({
     image: "",
     description: "",
@@ -52,7 +52,7 @@ function AddPost(props) {
           description: "",
           hobby: "",
         });
-        props.getPosts()
+        getPosts()
         
       })
       .catch((error) => {
