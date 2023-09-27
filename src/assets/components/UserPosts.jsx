@@ -40,11 +40,10 @@ function UserPosts() {
         <div className="user-posts">
             <h2>Your posts</h2>
             {userPosts && userPosts.map((post) => (
-                <div key={post._id} className="post">
+                <div key={post._id} className="post" style={{color: 'black'}}>
                     <img src={post.image} alt={post.description} />
                     <p>{post.description}</p>
-                    <p>{post.hobby}</p>
-                    {console.log(post.hobby)}
+                    <p>{post.hobby.title}</p>
                     <button onClick={(e) => handleDelete(post._id)}>Delete</button>
                     <Link to={`/update/${post._id}`}>Update</Link>
                 </div>

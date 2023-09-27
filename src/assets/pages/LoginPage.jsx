@@ -19,43 +19,43 @@ function LoginPage(){
     const handleLoginSubmit = (e) => {
         e.preventDefault();
         const requestBody = { email, password };
-    axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, requestBody)
-      .then((response) => {
-        console.log('JWT token', response.data.authToken );
-        storeToken(response.data.authToken);  
-        authenticateUser(); 
-        navigate('/user-homepage');                       
-      })
-      .catch((error) => {
-        const errorDescription = error.response.data.message;
-        setErrorMessage(errorDescription);
-      })
+        axios
+          .post(`${import.meta.env.VITE_API_URL}/auth/login`, requestBody)
+          .then((response) => {
+            console.log("JWT token", response.data.authToken);
+            storeToken(response.data.authToken);
+            authenticateUser();
+            navigate("/user-homepage");
+          })
+          .catch((error) => {
+            const errorDescription = error.response.data.message;
+            setErrorMessage(errorDescription);
+          });
     }
     return (
       <div id="loginbody">
         <form onSubmit={handleLoginSubmit} id="loginform">
-          <h1>Log in</h1>
-          <fieldset>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={email}
-              onChange={handleEmail}
-            />
-          </fieldset>
-          <fieldset>
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={handlePassword}
-            />
-          </fieldset>
-
+          <h1>Log in</h1>         
+            <fieldset>
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                onChange={handleEmail}
+              />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={password}
+                onChange={handlePassword}
+              />
+            </fieldset>
           <button type="submit">Log in</button>
         </form>
       </div>

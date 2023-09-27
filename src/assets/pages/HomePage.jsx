@@ -6,13 +6,13 @@ function HomePage(){
         <div id="upperPage">
           <img src={Logo} alt="Logo" />
           <div id="btn-container">
-            <button><Link to="/login">Log in</Link></button>
-            <button><Link to="/signup">Sign up</Link></button>
+            <button><Link to="/login" style={{color: 'white', textDecoration: 'none'}}>Log in</Link></button>
+            <button><Link to="/signup" style={{color: 'white', textDecoration: 'none'}}>Sign up</Link></button>
           </div>
         </div>
         <div id="lowerPart">
           <p>Welcome! The biggest platform for global meetup</p>
-          <Link to="/posts">Check our posts</Link>
+          <Link to="/posts" style={{color: 'white', textDecoration: 'none'}}>Check our posts</Link>
         </div>
         
 

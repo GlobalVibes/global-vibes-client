@@ -22,9 +22,8 @@ function AddHobby() {
 
     return (
         <div className="AddHobby">
-            <h3>Add New Hobby</h3>
-
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>           
+             <h3>Add New Hobby</h3>
                 <label>Title:</label>
                 <input
                     type="text"

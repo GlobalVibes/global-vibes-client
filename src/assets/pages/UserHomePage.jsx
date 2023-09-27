@@ -11,6 +11,8 @@ import { AuthContext } from '../context/auth.contex';
 
 
 function UserHomePage() {
+
+
     const [userPosts, setUserPosts] = useState([]);
 
     useEffect(() => {
@@ -38,11 +40,14 @@ function UserHomePage() {
             .catch((error) => console.log(error));
     };
 
+
     return (
         <div className="user-homepage">
+            <div id="user-functionality">
             <UserDetails />
             <AddPost getPosts={getPosts} userPosts={userPosts} />
-            <AddHobby />
+            <AddHobby />   
+            </div>
             <UserPosts userPosts={userPosts} handleDelete={handleDelete} />
         </div>
     )

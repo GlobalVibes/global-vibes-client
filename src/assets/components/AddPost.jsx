@@ -76,15 +76,18 @@ function AddPost(props) {
   return (
     newPost && (
       <div>
-        <h2>Add a New Post</h2>
-        <form onSubmit={handleSubmit} >
+        <form onSubmit={handleSubmit} id="AddPost">
+          <h3>Add a New Post</h3>
           <div>
             <label htmlFor="image">Image URL:</label>
             <input
               type="file"
               id="image"
               name="image"
-              onChange={(e) => { handleFileUpload(e) }}
+              //   value={newPost.image}
+              onChange={(e) => {
+                handleFileUpload(e);
+              }}
             />
           </div>
 
@@ -96,6 +99,8 @@ function AddPost(props) {
               value={newPost.description}
               onChange={handleInputChange}
               required
+              rows="1"
+              cols="5"
             ></textarea>
           </div>
 

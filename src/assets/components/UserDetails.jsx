@@ -14,9 +14,9 @@ function UserDetails() {
             />
 
             <div className="user-info">
-                <h3>Name: {user.name}</h3> 
-                <h3>Country:{user.country}</h3> 
-                <h3>Language:{user.language}</h3> 
+                <p>Name:<strong> {user.name}</strong></p> 
+                <p>Country:<strong>{user.country}</strong></p> 
+                <p>Language:<strong>{user.language}</strong></p> 
             </div>
         </div>
     )
