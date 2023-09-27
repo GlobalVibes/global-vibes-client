@@ -40,6 +40,7 @@ function UserPosts() {
                     <img src={post.image} alt={post.description} />
                     <p>{post.description}</p>
                     <p>{post.hobbie}</p>
+                    <p>{post.user}</p>
                     <button onClick={(e) => handleDelete(post._id)}>Delete</button>
                     <Link to={`/update/${post._id}`}>Update</Link>
                 </div>

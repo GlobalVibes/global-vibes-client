@@ -67,82 +67,89 @@ function SignupPage(){
 
 
     return (
-      <div>
-        <form onSubmit={handleSignupSubmit}>
+      <div id="signupbody">
+        <form onSubmit={handleSignupSubmit} id="signupformbody">
           <h1>Sign up</h1>
-          <fieldset>
-            <label htmlFor="email">
+          <fieldset style={{border: 'none', width: '100%', height: '50px', margin: '0 auto', height: '30%',display: 'flex',flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+            <label htmlFor="email" style={{marginBottom: "10px"}}>
               Email:
+            </label>
               <input
                 type="email"
                 id="email"
                 name="email"
                 value={email}
                 onChange={handleEmail}
+                style={{border: 'none', width: '70%', height: '50px', margin: '0 auto', height: '30%',display: 'flex',flexDirection: 'column', justifyContent: 'center', alignItems: 'center', borderRadius: '20px', border: 'none', padding: '10px'}}
               />
-            </label>
           </fieldset>
-          <fieldset>
-            <label htmlFor="password">
-              Password:
+          <fieldset style={{border: 'none', width: '100%', height: '30%',display: 'flex',flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+            <label htmlFor="password" style={{marginBottom: "10px"}}>
+              Password: 
+            </label>
               <input
                 type="password"
                 name="password"
                 id="password"
                 value={password}
                 onChange={handlePassword}
-              />
-            </label>
+                style={{border: 'none', width: '70%', height: '50px', margin: '0 auto', height: '30%',display: 'flex',flexDirection: 'column', justifyContent: 'center', alignItems: 'center', borderRadius: '20px', border: 'none', padding: '10px'}}
+              />          
           </fieldset>
-          <fieldset>
-            <label htmlFor="name">
+          <fieldset style={{border: 'none', width: '100%', height: '30%',display: 'flex',flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+            <label htmlFor="name" style={{marginBottom: "10px"}}>
               Name:
+            </label>
               <input
                 type="text"
                 id="name"
                 name="name"
                 value={name}
                 onChange={handleName}
+                style={{border: 'none', width: '70%', height: '50px', margin: '0 auto', height: '30%',display: 'flex',flexDirection: 'column', justifyContent: 'center', alignItems: 'center', borderRadius: '20px', border: 'none', padding: '10px'}}
               />
-            </label>
           </fieldset>
-          <fieldset>
-            <label htmlFor="profilePhoto">
+          <fieldset style={{border: 'none', width: '100%', height: '40%',display: 'flex',flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+            <label htmlFor="profilePhoto" style={{marginBottom: "10px"}}>
               {" "}
               Profile Photo:
+            </label>
               <input
                 type="file"
                 id="profilePhoto"
                 name="profilePhoto"
                 onChange={(e) => {handleFileUpload(e)}}
+                style={{border: 'none', width: '70%', height: '40%', margin: '0 auto', height: '30%',display: 'flex',flexDirection: 'column', justifyContent: 'center', alignItems: 'center', borderRadius: '20px', border: 'none'}}
               />
-            </label>
           </fieldset>
-          <fieldset>
-            <label htmlFor="country">
+          <fieldset style={{border: 'none', width: '100%', height: '30%',display: 'flex',flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+            <label htmlFor="country" style={{marginBottom: "10px"}}>
               Country:
+            </label>
               <input
                 type="text"
                 id="country"
                 name="country"
                 value={country}
                 onChange={handleCountry}
+                style={{border: 'none', width: '70%', height: '50px', margin: '0 auto', height: '30%',display: 'flex',flexDirection: 'column', justifyContent: 'center', alignItems: 'center', borderRadius: '20px', border: 'none', padding: '10px'}}
               />
-            </label>
+           
           </fieldset>
-          <fieldset>
-            <label htmlFor="langugage">
+          <fieldset style={{border: 'none', width: '100%', height: '30%',display: 'flex',flexDirection: 'column', justifyContent: 'center', alignItems: 'center', borderRadius: '20px', border: 'none'}}>
+            <label htmlFor="langugage" style={{marginBottom: "10px"}}>
               Language:
+            </label>
               <input
                 type="text"
                 id="langugage"
                 name="language"
                 value={language}
                 onChange={handleLanguage}
+                style={{border: 'none', width: '70%', height: '50px', margin: '0 auto', height: '30%',display: 'flex',flexDirection: 'column', justifyContent: 'center', alignItems: 'center', borderRadius: '20px', border: 'none', padding: '10px'}}
               />
-            </label>
           </fieldset>
-          <button type="submit">Sign up</button>
+          <button id="signupbutton"type="submit" style={{height: '50px', width: '70%', margin: '0 auto', borderRadius: '20px', border: 'none'}}>Sign up</button>
         </form>
       </div>
     );

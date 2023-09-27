@@ -8,14 +8,17 @@ import IsPrivate from './assets/components/isPrivate';
 import IsAnon from './assets/components/isAnon';
 import UserHomePage from './assets/pages/UserHomePage';
 import UpdatePost from './assets/pages/UpdatePost';
+import { useContext } from 'react';
+import { AuthContext } from './assets/context/auth.contex';
 
 
 function App() {
-
+const { user} = useContext(AuthContext)
   return (
     <>
-    <NavBar />
-    
+    {user &&   <NavBar />}
+  
+
     <Routes>
       <Route path="/" element={<HomePage/>}></Route>
       <Route path="/signup" element={<IsAnon><SignupPage /></IsAnon>}></Route>

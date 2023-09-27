@@ -34,28 +34,27 @@ function LoginPage(){
     return (
       <div id="loginbody">
         <form onSubmit={handleLoginSubmit} id="loginform">
-          <h1>Log in</h1>
-          <fieldset>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={email}
-              onChange={handleEmail}
-            />
-          </fieldset>
-          <fieldset>
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={handlePassword}
-            />
-          </fieldset>
-
+          <h1>Log in</h1>         
+            <fieldset>
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                onChange={handleEmail}
+              />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={password}
+                onChange={handlePassword}
+              />
+            </fieldset>
           <button type="submit">Log in</button>
         </form>
       </div>
