@@ -1,5 +1,5 @@
 import React from 'react';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../context/auth.contex";
 import { Link } from 'react-router-dom';
 
@@ -9,6 +9,13 @@ function NavBar() {
     isLoggedIn,    
     logOutUser
   } = useContext(AuthContext);
+
+  const [filterValue, setFilterValue] = useState('');
+
+  const handleFilterChange = (e) => {
+    setFilterValue(e.target.value);
+    onFilterChange(e.target.value); 
+  };
 
   return (
     <div id="navbar">
@@ -20,6 +27,12 @@ function NavBar() {
 
           <button onClick={logOutUser}>Logout</button>
           
+          <input
+            type="text"
+            placeholder="Filter by hobby"
+            value={filterValue}
+            onChange={handleFilterChange}
+          />
         </>
       )}
 
