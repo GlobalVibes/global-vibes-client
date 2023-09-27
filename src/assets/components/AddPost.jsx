@@ -1,34 +1,37 @@
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/auth.contex";
 import service from "../../services/file-upload.service";
 
-function AddPost({hobbies, setHobbies, getPosts, userPosts}) {
+function AddPost({ hobbies, setHobbies, getPosts, userPosts }) {
   const { storedToken } = useContext(AuthContext);
- 
+
   const [newPost, setNewPost] = useState({
     image: "",
     description: "",
     hobby: "",
   });
 
-  const [imageUrl, setImageUrl] = useState("")
+  const [imageUrl, setImageUrl] = useState("");
+  const [isFormOpen, setIsFormOpen] = useState(false); // State to manage form visibility
+
+  const toggleForm = () => {
+    setIsFormOpen(!isFormOpen);
+  };
 
   const handleFileUpload = (e) => {
     console.log("The file to be uploaded is: ", e.target.files[0]);
 
     const uploadData = new FormData();
 
-
     uploadData.append("profilePhoto", e.target.files[0]);
 
     service
       .uploadImage(uploadData)
-      .then(response => {
-
+      .then((response) => {
         setNewPost({ ...newPost, image: response.fileUrl });
       })
-      .catch(err => console.log("Error while uploading the file: ", err));
+      .catch((err) => console.log("Error while uploading the file: ", err));
   };
 
   const handleInputChange = (e) => {
@@ -52,8 +55,7 @@ function AddPost({hobbies, setHobbies, getPosts, userPosts}) {
           description: "",
           hobby: "",
         });
-        getPosts()
-        
+        getPosts();
       })
       .catch((error) => {
         console.error("Error creating a new post:", error);
@@ -75,8 +77,19 @@ function AddPost({hobbies, setHobbies, getPosts, userPosts}) {
   }, []);
 
   return (
-    newPost && (
-      <div>
+    <div>
+      <button
+        type="button"
+        className="btn btn-custom" // Add a custom class for styling
+        onClick={toggleForm}
+      >
+        {isFormOpen ? "Hide Form" : "Add Post"}
+      </button>
+
+      <div
+        className={`collapse ${isFormOpen ? "show" : ""}`}
+        id="addPostForm"
+      >
         <form onSubmit={handleSubmit} id="AddPost">
           <h3>Add a New Post</h3>
           <div>
@@ -85,7 +98,6 @@ function AddPost({hobbies, setHobbies, getPosts, userPosts}) {
               type="file"
               id="image"
               name="image"
-              //   value={newPost.image}
               onChange={(e) => {
                 handleFileUpload(e);
               }}
@@ -128,7 +140,10 @@ function AddPost({hobbies, setHobbies, getPosts, userPosts}) {
           <button type="submit">Add Post</button>
         </form>
       </div>
-    )
+    </div>
   );
 }
+
 export default AddPost;
+
+
