@@ -40,7 +40,7 @@ function AllPosts() {
                 <div key={post._id} className="post">
                     <img src={post.image} alt={post.description} />
                     <p>{post.description}</p>
-                    <p>{post.hobby}</p>
+                    <p>{post.hobby.title}</p>
                 </div>
             ))}
         </div>
