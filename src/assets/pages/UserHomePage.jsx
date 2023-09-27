@@ -12,10 +12,9 @@ import { AuthContext } from '../context/auth.contex';
 
 function UserHomePage() {
     const [userPosts, setUserPosts] = useState([]);
-    console.log(userPosts)
 
     useEffect(() => {
-        getPosts();        
+        getPosts();
     }, []);
 
     const getPosts = () => {
