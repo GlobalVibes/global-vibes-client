@@ -3,26 +3,22 @@ import { useState} from "react";
 
 
 function AddHobby() {
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");    
-
+    const [title, setTitle] = useState("");      
 
     const handleSubmit = (e) => {
         e.preventDefault();        
 
-        const requestBody = { title, description };
+        const requestBody = { title };
 
         axios
             .post(`${import.meta.env.VITE_API_URL}/api/hobbies`, requestBody)
             .then((response) => {
 
-                setTitle("");
-                setDescription("");
+                setTitle("");               
                 
             })
             .catch((error) => console.log(error));
     };
-
 
     return (
         <div className="AddHobby">
@@ -35,16 +31,8 @@ function AddHobby() {
                     name="title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                />
-
-                <label>Description:</label>
-                <textarea
-                    type="text"
-                    name="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-
+                />             
+                
                 <button type="submit">Add Hobby</button>
             </form>
         </div>
