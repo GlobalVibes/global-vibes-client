@@ -8,6 +8,7 @@ import IsPrivate from './assets/components/isPrivate';
 import IsAnon from './assets/components/isAnon';
 import UserHomePage from './assets/pages/UserHomePage';
 import UpdatePost from './assets/pages/UpdatePost';
+import AllPosts from './assets/pages/AllpostsPage';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       <Route path="/login" element={<IsAnon><LoginPage /></IsAnon>  }></Route>
       <Route path="/user-homepage" element={<IsPrivate><UserHomePage /></IsPrivate>}></Route>  
       <Route path="/update/:postId" element={<IsPrivate><UpdatePost /></IsPrivate>}></Route>
+      <Route path="/posts" element={<IsAnon><AllPosts /></IsAnon>}></Route>
     </Routes>
     </>
   )

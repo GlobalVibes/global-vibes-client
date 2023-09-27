@@ -12,7 +12,7 @@ function HomePage(){
         </div>
         <div id="lowerPart">
           <p>Welcome! The biggest platform for global meetup</p>
-          <Link to="/api/posts">Meet our community</Link>
+          <Link to="/posts">Check our posts</Link>
         </div>
         
 
