@@ -53,7 +53,7 @@ function AddPost(props) {
           hobby: "",
         });
         props.getPosts()
-        console.log("The page is refreshed");
+        
       })
       .catch((error) => {
         console.error("Error creating a new post:", error);
