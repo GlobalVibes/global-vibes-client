@@ -11,23 +11,22 @@ function AddPost(props) {
     description: "",
     hobby: "",
   });
+
   const [imageUrl, setImageUrl] = useState("")
 
   const handleFileUpload = (e) => {
     console.log("The file to be uploaded is: ", e.target.files[0]);
- 
+
     const uploadData = new FormData();
- 
-    // imageUrl => this name has to be the same as in the model since we pass
-    // req.body to .create() method when creating a new movie in '/api/movies' POST route
+
+
     uploadData.append("profilePhoto", e.target.files[0]);
- 
+
     service
       .uploadImage(uploadData)
       .then(response => {
-        // console.log("response is: ", response);
-        // response carries "fileUrl" which we can use to update the state
-        setNewPost({...newPost, image: response.fileUrl});
+
+        setNewPost({ ...newPost, image: response.fileUrl });
       })
       .catch(err => console.log("Error while uploading the file: ", err));
   };
@@ -41,7 +40,7 @@ function AddPost(props) {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();    
+    e.preventDefault();
 
     axios
       .post(`${import.meta.env.VITE_API_URL}/api/posts`, newPost, {
@@ -54,7 +53,8 @@ function AddPost(props) {
           hobby: "",
         });
         props.getPosts()
-            })
+        console.log("The page is refreshed");
+      })
       .catch((error) => {
         console.error("Error creating a new post:", error);
       });
@@ -84,10 +84,10 @@ function AddPost(props) {
               type="file"
               id="image"
               name="image"
-            //   value={newPost.image}
-              onChange={(e) => {handleFileUpload(e)}}
+              onChange={(e) => { handleFileUpload(e) }}
             />
           </div>
+
           <div>
             <label htmlFor="description">Description:</label>
             <textarea
@@ -98,19 +98,27 @@ function AddPost(props) {
               required
             ></textarea>
           </div>
+
           <div>
             <label htmlFor="hobby">Hobby:</label>
-
-            <select id="hobby">
+            <select
+              id="hobby"
+              name="hobby"
+              value={newPost.hobby}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="">Select a Hobby</option>
               {hobbies.map((elem) => {
                 return (
-                  <option key={elem._id} value={elem.description}>
+                  <option key={elem._id} value={elem._id}>
                     {elem.title}
                   </option>
                 );
               })}
             </select>
           </div>
+
           <button type="submit">Add Post</button>
         </form>
       </div>
