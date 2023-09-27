@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext} from '../context/auth.contex';
 import service from '../../services/file-upload.service';
-
+import api from "../../services/api";
 function SignupPage(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -32,8 +32,8 @@ function SignupPage(){
       // Make an axios request to the API
       // If the POST request is a successful redirect to the login page
       // If the request resolves with an error, set the error message in the state
-      axios
-        .post(`${import.meta.env.VITE_API_URL}/auth/signup`, requestBody)
+      api
+        .post(`/auth/signup`, requestBody)
         .then((response) => {
           console.log(response)
           navigate("/login");

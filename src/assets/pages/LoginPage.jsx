@@ -19,17 +19,18 @@ function LoginPage(){
     const handleLoginSubmit = (e) => {
         e.preventDefault();
         const requestBody = { email, password };
-    axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, requestBody)
-      .then((response) => {
-        console.log('JWT token', response.data.authToken );
-        storeToken(response.data.authToken);  
-        authenticateUser(); 
-        navigate('/user-homepage');                       
-      })
-      .catch((error) => {
-        const errorDescription = error.response.data.message;
-        setErrorMessage(errorDescription);
-      })
+        axios
+          .post(`${import.meta.env.VITE_API_URL}/auth/login`, requestBody)
+          .then((response) => {
+            console.log("JWT token", response.data.authToken);
+            storeToken(response.data.authToken);
+            authenticateUser();
+            navigate("/user-homepage");
+          })
+          .catch((error) => {
+            const errorDescription = error.response.data.message;
+            setErrorMessage(errorDescription);
+          });
     }
     return (
       <div id="loginbody">
