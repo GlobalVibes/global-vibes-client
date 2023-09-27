@@ -15,7 +15,11 @@ function AllUsersPosts() {
                 headers: { Authorization: `Bearer ${storedToken}` },
             })
             .then(response => {
-                setAllUsersPosts(response.data)
+                const postsWithLikesInitialized = response.data.map(post => ({
+                    ...post,
+                    likes: 0 
+                }));
+                setAllUsersPosts(postsWithLikesInitialized);
             })
             .catch((error) => console.log(error));
     }, []);
@@ -23,7 +27,11 @@ function AllUsersPosts() {
     useEffect(() => {
         service.getPosts()
             .then((data) => {
-                setAllUsersPosts(data);
+                const postsWithLikesInitialized = data.map(post => ({
+                    ...post,
+                    likes: 0 
+                }));
+                setAllUsersPosts(postsWithLikesInitialized);
             })
             .catch((err) => console.log(err));
     }, []);
@@ -34,6 +42,19 @@ function AllUsersPosts() {
         );
         setFilterValue(e.target.value);
         setAllUsersPosts(filteredPosts);
+    };
+
+    const handleLikeClick = (postId) => {
+        
+        const updatedPosts = allUsersPosts.map(post => {
+            if (post._id === postId) {
+             
+                const updatedPost = { ...post, likes: post.likes + 1 };
+                return updatedPost;
+            }
+            return post;
+        });
+        setAllUsersPosts(updatedPosts);
     };
 
     return (
@@ -50,8 +71,10 @@ function AllUsersPosts() {
                     <img src={post.image} alt={post.description} />
                     <p>{post.description}</p>
                     <p>{post.hobby.title}</p>
+                    <button onClick={() => handleLikeClick(post._id)}>
+                        <span role="img" aria-label="heart">❤️</span> {post.likes}
+                    </button>
                     <button onClick={(e) => (post._id)}>Comment</button>
-                    <button onClick={(e) => (post._id)}>Like</button>
                 </div>
             ))}
         </div>
