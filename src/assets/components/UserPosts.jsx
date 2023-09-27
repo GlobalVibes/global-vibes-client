@@ -4,10 +4,12 @@ import { AuthContext } from '../context/auth.contex';
 import { Link, useNavigate } from "react-router-dom";
 const storedToken = localStorage.getItem("authToken");
 import service from "../../services/file-upload.service";
+
 function UserPosts() {
     const { user } = useContext(AuthContext);
     const [userPosts, setUserPosts] = useState([])
     const navigate = useNavigate()
+    
     useEffect(() => {
         axios
             .get(`${import.meta.env.VITE_API_URL}/api/posts`)
@@ -16,15 +18,17 @@ function UserPosts() {
             })
             .catch((error) => console.log(error));
     }, []);
+   
     useEffect(() => {
         service.getPosts()
           .then((data) => {
-            // console.log("data", data);
+           
             setUserPosts(data);
           })
           .catch((err) => console.log(err));
       }, []);
-    const handleDelete = (postId) => {
+    
+      const handleDelete = (postId) => {
         axios
             .delete(`${import.meta.env.VITE_API_URL}/api/posts/${postId}`, { headers: { Authorization: `Bearer ${storedToken}` } })
             .then(() => {
@@ -40,6 +44,7 @@ function UserPosts() {
                     <img src={post.image} alt={post.description} />
                     <p>{post.description}</p>
                     <p>{post.hobby}</p>
+                    {console.log(post.hobby)}
                     <button onClick={(e) => handleDelete(post._id)}>Delete</button>
                     <Link to={`/update/${post._id}`}>Update</Link>
                 </div>
