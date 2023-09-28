@@ -80,7 +80,7 @@ function AddPost({ hobbies, setHobbies, getPosts, userPosts }) {
     <div>
       <button
         type="button"
-        className="btn btn-custom" // Add a custom class for styling
+        className="btn btn-custom"
         onClick={toggleForm}
       >
         {isFormOpen ? "Hide Form" : "Add Post"}
@@ -91,42 +91,44 @@ function AddPost({ hobbies, setHobbies, getPosts, userPosts }) {
         id="addPostForm"
       >
         <form onSubmit={handleSubmit} id="AddPost">
-          <h3>Add a New Post</h3>
-          <div>
-            <label htmlFor="image">Image URL:</label>
+          <div style={{display: 'flex', flexDirection: 'column', justifyContent:'center', alignItems:'center', margin: '10px 0'}}>
+            <label htmlFor="image" style={{marginBottom: "10px"}}>Image:</label>
             <input
               type="file"
               id="image"
               name="image"
               onChange={(e) => {
-                handleFileUpload(e);
+                handleFileUpload(e);            
               }}
+              style={{marginLeft: '50px'}}
             />
           </div>
 
-          <div>
-            <label htmlFor="description">Description:</label>
+          <div style={{display: 'flex', flexDirection: 'column', justifyContent:'center', alignItems:'center', margin: '10px 0'}}>
+            <label htmlFor="description" style={{marginBottom: "10px"}}>Description:</label>
             <textarea
               id="description"
               name="description"
               value={newPost.description}
               onChange={handleInputChange}
               required
-              rows="1"
-              cols="5"
+              rows="4"
+              cols="30"
+              style={{border: 'none', borderRadius: '10px'}}
             ></textarea>
           </div>
 
-          <div>
-            <label htmlFor="hobby">Hobby:</label>
+          <div style={{display: 'flex', flexDirection: 'column', justifyContent:'center', alignItems:'center', margin: '10px 0'}}>
+            <label htmlFor="hobby" style={{marginBottom: "10px"}}>Hobby:</label>
             <select
               id="hobby"
               name="hobby"
               value={newPost.hobby}
               onChange={handleInputChange}
               required
+              style={{border: 'none', padding: '5px', width: '200px', borderRadius:'10px'}}
             >
-              <option value="">Select a Hobby</option>
+              <option value="" >Select a Hobby</option>
               {hobbies.map((elem) => {
                 return (
                   <option key={elem._id} value={elem._id}>
@@ -136,8 +138,9 @@ function AddPost({ hobbies, setHobbies, getPosts, userPosts }) {
               })}
             </select>
           </div>
-
-          <button type="submit">Add Post</button>
+          <div style={{display: 'flex', flexDirection: 'column', justifyContent:'center', alignItems:'center', marginTop: '25px'}}>
+            <button type="submit" style={{margin: '0 auto', widht: '200px', height: '40px', border: 'none', backgroundColor: 'pink', borderRadius: '10px', padding: '10px'}}>Add Post</button>
+          </div>
         </form>
       </div>
     </div>

@@ -1,57 +1,89 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
-const storedToken = localStorage.getItem("authToken");
+import { AuthContext } from "../context/auth.contex";
 import {useNavigate} from 'react-router-dom';
+import service from "../../services/file-upload.service";
 
 function UpdatePost() {
-    
-  const { postId } = useParams();
-  const [newPost, setNewPost] = useState({image: "", description: ""});
+ const [hobbies, setHobbies] = useState([]);
+  const [newPost, setNewPost] = useState({
+    image: "",
+    description: "",
+    hobby: "",
+  });
+  const [imageUrl, setImageUrl] = useState("");
+  const [isFormOpen, setIsFormOpen] = useState(false); // State to manage form visibility
+
+  const {postId} = useParams();
+  const storedToken = localStorage.getItem("authToken");
   const navigate = useNavigate();
 
-  //useEffect runs on render and when postId changes (postId comes from the URL params). Fetches the post based on ID
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_API_URL}/api/posts/${postId}`)
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewPost({
+      ...newPost,
+      [name]: value,
+    });
+  };
+
+  const handleFileUpload = (e) => {
+    console.log("The file to be uploaded is: ", e.target.files[0]);
+    const uploadData = new FormData();
+    uploadData.append("profilePhoto", e.target.files[0]);
+    service
+      .uploadImage(uploadData)
       .then((response) => {
-        setNewPost(response.data);
-      });
-  }, [postId]);
+
+        setNewPost({ ...newPost, image: response.fileUrl });
+      })
+      .catch((err) => console.log("Error while uploading the file: ", err));
+  };
 
   const handleSubmit = (e) => {
+    console.log("new post", newPost)
     e.preventDefault();
-    console.log(newPost);
-
     axios
       .put(`${import.meta.env.VITE_API_URL}/api/posts/${postId}`, newPost, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        const createdPost = response.data;
+        // setNewPost({...newPost, response.data});
+                console.log(response.data);
         navigate(`/user-homepage`);
       })
       .catch((error) => {
         console.error("Error creating a new post:", error);
       });
-  };
-  console.log("hello")
+    }
+
+  useEffect(() => {   
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/api/hobbies`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((hobbies) => {
+        setHobbies(hobbies.data);
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
+  }, []);
 
   return (
     // newPost && to be sure you have a post before rendering
     newPost && (
       <form onSubmit={handleSubmit}>
-        <h1>Update Post</h1>
         <div>
           <label htmlFor="image">Image URL:</label>
           <input
-            type="text"
+            type="file"
             id="image"
             name="image"
-            value={newPost.image}
-            onChange={(e) =>
-              setNewPost((prev) => ({ ...prev, image: e.target.value }))
-            }
+            //value={newPost.image}
+            onChange={(e) => 
+              handleFileUpload(e)
+             }
           />
         </div>
         <div>
@@ -59,14 +91,33 @@ function UpdatePost() {
           <textarea
             id="description"
             name="description"
-            value={newPost.description}
-            onChange={(e) =>
+            //value={newPost.description}
+            onChange={(e) => 
               setNewPost((prev) => ({ ...prev, description: e.target.value }))
             }
-            required
           ></textarea>
         </div>
-        <button type="submit">Submit</button>
+        <div>
+            <label htmlFor="hobby">Hobby:</label>
+            <select
+              id="hobby"
+              name="hobby"
+              value={newPost.hobby}
+              onChange={(e) => 
+                setNewPost((prev) => ({ ...prev, hobby: e.target.value }))
+              }
+            >
+              <option value="">Select a Hobby</option>
+              {hobbies.map((elem) => {
+                return (
+                  <option key={elem._id} value={elem._id}>
+                    {elem.title}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <button type="submit">Submit</button>
       </form>
     )
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/auth.contex";
 import { Link } from 'react-router-dom';
-
+import GlobalVibes from '../pages/images/GlobalVibesLogo.png';
 function NavBar() {
 
   const {
@@ -20,27 +20,28 @@ function NavBar() {
   return (
     <div id="navbar">
       {isLoggedIn && (
-        <>
+        <div style={{display: 'flex', justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center'}}>
+          <img src={GlobalVibes} alt="Logo" width='200' height='150' style={{objectFit: 'cover'}}/>
+          <div style={{display: 'flex', flexDirection: 'row-reverse', justifyContent:'center', alignItems:'center', gap: '20px', padding: '30px'}}>
           <Link to="/user-homepage">
-            <button>User homepage</button>
+            <button id="homepagebutton">User homepage</button>
           </Link>
-
-          <button onClick={logOutUser}>Logout</button>
-          
+          <button onClick={logOutUser} id="logoutbutton">Logout</button>          
           <input
             type="text"
             placeholder="Filter by hobby"
             value={filterValue}
             onChange={handleFilterChange}
           />
-        </>
+          </div>
+        </div>
       )}
 
       {!isLoggedIn && (
-        <>
-          <Link to="/signup"> <button>Sign Up</button> </Link>
-          <Link to="/login"> <button>Login</button> </Link>
-        </>
+        <div>
+          <Link to="/signup"> <button id="signupbutton">Sign Up</button> </Link>
+          <Link to="/login"> <button id="loginbutton">Login</button> </Link>
+        </div>
       )}
     </div>
   );
