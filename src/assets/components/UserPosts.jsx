@@ -4,7 +4,7 @@ import { AuthContext } from "../context/auth.contex";
 
 function UserPosts(props) {
     const { user } = useContext(AuthContext); 
-    console.log(props)
+    
     return (
         <div className="user-posts">
             <h2>Your posts</h2>

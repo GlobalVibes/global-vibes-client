@@ -4,16 +4,15 @@ import { AuthContext } from "../context/auth.contex";
 import service from "../../services/file-upload.service";
 
 function AddPost({ hobbies, setHobbies, getPosts, userPosts }) {
-  const { storedToken } = useContext(AuthContext);
-
   const [newPost, setNewPost] = useState({
     image: "",
     description: "",
     hobby: "",
   });
-
   const [imageUrl, setImageUrl] = useState("");
-  const [isFormOpen, setIsFormOpen] = useState(false); // State to manage form visibility
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
+  const { storedToken } = useContext(AuthContext);
 
   const toggleForm = () => {
     setIsFormOpen(!isFormOpen);
@@ -80,7 +79,7 @@ function AddPost({ hobbies, setHobbies, getPosts, userPosts }) {
     <div>
       <button
         type="button"
-        className="btn btn-custom" // Add a custom class for styling
+        className="btn btn-custom"
         onClick={toggleForm}
       >
         {isFormOpen ? "Hide Form" : "Add Post"}
