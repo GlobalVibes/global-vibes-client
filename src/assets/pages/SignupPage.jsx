@@ -149,7 +149,7 @@ function SignupPage(){
                 style={{border: 'none', width: '70%', height: '50px', margin: '0 auto', height: '30%',display: 'flex',flexDirection: 'column', justifyContent: 'center', alignItems: 'center', borderRadius: '20px', border: 'none', padding: '10px'}}
               />
           </fieldset>
-          <button id="signupbutton"type="submit" style={{height: '50px', width: '70%', margin: '0 auto', borderRadius: '20px', border: 'none'}}>Sign up</button>
+          <button id="signupbutton"type="submit" style={{height: '50px', width: '70%', margin: '0 auto', borderRadius: '20px', border: 'none', marginTop: '20px'}}>Sign up</button>
         </form>
       </div>
     );

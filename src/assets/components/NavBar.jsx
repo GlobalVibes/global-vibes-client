@@ -17,9 +17,11 @@ function NavBar() {
           <img src={GlobalVibes} alt="Logo" width='200' height='150' style={{objectFit: 'cover'}}/>
           <div style={{display: 'flex', flexDirection: 'row-reverse', justifyContent:'center', alignItems:'center', gap: '20px', padding: '30px'}}>
           <Link to="/user-homepage">
-            <button id="homepagebutton">User homepage</button>
+            <button id="homepagebutton">Homepage</button>
           </Link>
-          <button onClick={logOutUser} id="logoutbutton">Logout</button>          
+          <Link to="/">
+            <button onClick={logOutUser} id="logoutbutton">Logout</button>
+          </Link>          
           <Link to="/allposts"> <button id="checkotherpostsbutton">Check other posts</button> </Link>
           </div>
         </div>

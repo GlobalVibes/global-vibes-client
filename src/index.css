@@ -6,6 +6,7 @@
 }
 #root{
   padding: 0;
+  margin: 0;
 }
 #bodyHome {
   width: 100vw;
@@ -15,6 +16,7 @@
   align-items: center;
   justify-content: space-evenly;
   background-color: black;
+  overflow: hidden;
 }
 #bodyHome #upperPage, #bodyHome #lowerPart{
   display: flex;
@@ -132,7 +134,7 @@ padding: 20px;
 }
 
 #signupformbody{
-  height: 60vh;
+  height: auto;
   width: 70vw;
   border: 3px solid white;
   border-radius: 30px;
