@@ -7,6 +7,7 @@ function AllUsersPosts() {
     const { user } = useContext(AuthContext);
     const [allUsersPosts, setAllUsersPosts] = useState([]);
     const [filterValue, setFilterValue] = useState('');
+    const [commentTexts, setCommentTexts] = useState({}); 
 
     useEffect(() => {
         const storedToken = localStorage.getItem("authToken");
@@ -17,7 +18,8 @@ function AllUsersPosts() {
             .then(response => {
                 const postsWithLikesInitialized = response.data.map(post => ({
                     ...post,
-                    likes: 0 
+                    likes: 0,
+                    comments: [], 
                 }));
                 setAllUsersPosts(postsWithLikesInitialized);
             })
@@ -29,7 +31,8 @@ function AllUsersPosts() {
             .then((data) => {
                 const postsWithLikesInitialized = data.map(post => ({
                     ...post,
-                    likes: 0 
+                    likes: 0,
+                    comments: [], 
                 }));
                 setAllUsersPosts(postsWithLikesInitialized);
             })
@@ -45,16 +48,46 @@ function AllUsersPosts() {
     };
 
     const handleLikeClick = (postId) => {
-        
         const updatedPosts = allUsersPosts.map(post => {
             if (post._id === postId) {
-             
                 const updatedPost = { ...post, likes: post.likes + 1 };
                 return updatedPost;
             }
             return post;
         });
         setAllUsersPosts(updatedPosts);
+    };
+
+    const handleCommentChange = (e, postId) => {
+        const updatedCommentTexts = { ...commentTexts };
+        updatedCommentTexts[postId] = e.target.value;
+        setCommentTexts(updatedCommentTexts);
+    };
+
+    const handleCommentSubmit = (postId) => {
+        const newCommentText = commentTexts[postId];
+
+        if (newCommentText) {
+            const newComment = {
+                text: newCommentText,
+                
+            };
+
+            const updatedPosts = allUsersPosts.map((post) => {
+                if (post._id === postId) {
+                    return {
+                        ...post,
+                        comments: [...post.comments, newComment],
+                    };
+                }
+                return post;
+            });
+
+            setAllUsersPosts(updatedPosts);
+            const updatedCommentTexts = { ...commentTexts };
+            updatedCommentTexts[postId] = ''; 
+            setCommentTexts(updatedCommentTexts);
+        }
     };
 
     return (
@@ -74,7 +107,24 @@ function AllUsersPosts() {
                     <button onClick={() => handleLikeClick(post._id)}>
                         <span role="img" aria-label="heart">❤️</span> {post.likes}
                     </button>
-                    <button onClick={(e) => (post._id)}>Comment</button>
+                    <input
+                        type="text"
+                        placeholder="Add a comment"
+                        value={commentTexts[post._id] || ''}
+                        onChange={(e) => handleCommentChange(e, post._id)}
+                    />
+                    <button onClick={() => handleCommentSubmit(post._id)}>
+                        Comment
+                    </button>
+                    <div className="comments">
+                        <label>Coments</label>
+                        <br />
+                        {post.comments.map((comment, index) => (
+                            <div key={index} className="comment">
+                                {comment.text}
+                            </div>
+                        ))}
+                    </div>
                 </div>
             ))}
         </div>
