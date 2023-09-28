@@ -73,20 +73,9 @@ function UpdatePost() {
   return (
     // newPost && to be sure you have a post before rendering
     newPost && (
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="image">Image URL:</label>
-          <input
-            type="file"
-            id="image"
-            name="image"
-            //value={newPost.image}
-            onChange={(e) => 
-              handleFileUpload(e)
-             }
-          />
-        </div>
-        <div>
+      <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', justifyContent:'center', alignItems: 'center', gap: '50px', padding: '20px', color:'white'}}>
+        <h1>Edit Post</h1>
+        <div style={{display: 'flex', flexDirection: 'column', justifyContent:'center', alignItems: 'center'}}>
           <label htmlFor="description">Description:</label>
           <textarea
             id="description"
@@ -97,7 +86,7 @@ function UpdatePost() {
             }
           ></textarea>
         </div>
-        <div>
+        <div style={{display: 'flex', flexDirection: 'column', justifyContent:'center', alignItems: 'center'}}>
             <label htmlFor="hobby">Hobby:</label>
             <select
               id="hobby"
@@ -117,7 +106,7 @@ function UpdatePost() {
               })}
             </select>
           </div>
-          <button type="submit">Submit</button>
+          <button type="submit" style={{ backgroundColor: 'pink', borderRadius: '10px', padding: '5px', border: 'none' }}>Submit</button>
       </form>
     )
   );

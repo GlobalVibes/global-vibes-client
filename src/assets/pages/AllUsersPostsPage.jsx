@@ -100,10 +100,15 @@ function AllUsersPosts() {
                 onChange={handleFilterChange}
             />
             {allUsersPosts && allUsersPosts.map((post) => (
-                <div key={post._id} className="post">
-                    <img src={post.image} alt={post.description} />
-                    <p>{post.description}</p>
-                    <p>{post.hobby.title}</p>
+                <div key={post._id} className="post" style={{width: '60%', margin: '30px auto', color: 'black'}}>
+                        <p style={{color: 'white', backgroundColor: 'purple', width:'100px', height:'30px', padding: '5px', borderRadius: '40px', margin: '0 auto'}}>{post.hobby.title}</p>   
+                        <br/>                    
+                        <div style={{display: 'flex', flexDirection:"column", justifyContent:'center', alignItems:'center'}}>
+                        {post.image && 
+                        (<img src={post.image} alt={post.description} width='500' height='500' style={{objectFit: 'cover'}}/>)
+                        }
+                        <p style={{textAlign: 'center'}}>{post.description}</p>
+                        </div>
                     <button onClick={() => handleLikeClick(post._id)}>
                         <span role="img" aria-label="heart">❤️</span> {post.likes}
                     </button>
