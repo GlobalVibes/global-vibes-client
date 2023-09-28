@@ -20,7 +20,7 @@ function NavBar() {
             <button id="homepagebutton">User homepage</button>
           </Link>
           <button onClick={logOutUser} id="logoutbutton">Logout</button>          
-          <Link to="/allposts"> <button>Check other posts</button> </Link>
+          <Link to="/allposts"> <button id="checkotherpostsbutton">Check other posts</button> </Link>
           </div>
         </div>
 
