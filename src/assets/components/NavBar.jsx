@@ -8,14 +8,7 @@ function NavBar() {
   const {
     isLoggedIn,    
     logOutUser
-  } = useContext(AuthContext);
-
-  const [filterValue, setFilterValue] = useState('');
-
-  const handleFilterChange = (e) => {
-    setFilterValue(e.target.value);
-    onFilterChange(e.target.value); 
-  };
+  } = useContext(AuthContext); 
 
   return (
     <div id="navbar">
@@ -26,15 +19,12 @@ function NavBar() {
           <Link to="/user-homepage">
             <button id="homepagebutton">User homepage</button>
           </Link>
-          <button onClick={logOutUser} id="logoutbutton">Logout</button>          
-          <input
-            type="text"
-            placeholder="Filter by hobby"
-            value={filterValue}
-            onChange={handleFilterChange}
-          />
-          </div>
-        </div>
+
+          <button onClick={logOutUser}>Logout</button>
+
+          <Link to="/allposts"> <button>Check other posts</button> </Link>
+          
+        </>
       )}
 
       {!isLoggedIn && (
