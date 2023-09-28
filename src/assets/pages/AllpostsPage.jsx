@@ -30,17 +30,22 @@ function AllPosts() {
         <div className="user-posts">
             <h2>All Posts</h2>
             <>
-                <label><Link to="/signup"> <button>Sign Up</button> </Link> to be part of our community and share your posts as well!</label>
+                <label><Link to="/signup"> <button style={{border: 'none', backgroundColor: 'purple', color: 'white', borderRadius: '10px', padding: '5px'}}>Sign Up</button> </Link> to be part of our community and share your posts as well!</label>
 
             </>
             <>
-                <label>Already have an acount? <Link to="/login"> <button>Login</button> </Link></label>
+                <label>Already have an acount? <Link to="/login"> <button style={{border: 'none', backgroundColor: 'purple', color: 'white', borderRadius: '10px', padding: '5px'}}>Login</button> </Link></label>
             </>
             {allPosts && allPosts.map((post) => (
-                <div key={post._id} className="post">
-                    <img src={post.image} alt={post.description} />
-                    <p>{post.description}</p>
-                    <p>{post.hobby.title}</p>
+                <div key={post._id} className="post" style={{width: '60%', margin: '30px auto', color: 'black'}}>
+                        <p style={{color: 'white', backgroundColor: 'purple', width:'100px', height:'30px', padding: '5px', borderRadius: '40px', margin: '0 auto'}}>{post.hobby.title}</p>   
+                        <br/>                    
+                        <div style={{display: 'flex', flexDirection:"column", justifyContent:'center', alignItems:'center'}}>
+                        {post.image && 
+                        (<img src={post.image} alt={post.description} width='500' height='500' style={{objectFit: 'cover'}}/>)
+                        }
+                        <p style={{textAlign: 'center'}}>{post.description}</p>
+                        </div>
                 </div>
             ))}
         </div>
