@@ -31,10 +31,7 @@
   text-decoration: none;
   color: white;
 }
-
-#lowerPart p:hover{
-  text-decoration: underline;
-}
+#checkourpostbutton
 #bodyHome #upperPage img{
  width: 50vw;
  height: 40vh;
@@ -49,7 +46,7 @@
   justify-content: space-evenly;
 }
 
-#btn-container button{
+#btn-container .btn{
   border: none;
   width: 150px;
   height: 50px;
@@ -59,6 +56,15 @@
   text-transform: uppercase;
   color: white;
   cursor: pointer;
+}
+#btn-container #checkourpostbutton{
+  width: 250px;
+   height: 50px; 
+   border: none; 
+   padding: 15px; 
+   border-radius: 20px;
+   background: linear-gradient(90deg,#701b58,#df1959,#fdd408 );
+   color: white;
 }
 #btn-container button:hover{
  opacity: 0.7;
